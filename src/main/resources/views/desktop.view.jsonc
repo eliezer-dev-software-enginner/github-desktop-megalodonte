@@ -1,0 +1,1085 @@
+// Interface declarativa: composição, estados, bindings e eventos pertencem aos dados.
+{
+  "version": 1,
+  "id": "desktop",
+  "states": {
+    "busy": {
+      "type": "boolean",
+      "initial": false
+    },
+    "hasRepo": {
+      "type": "boolean",
+      "initial": false
+    },
+    "changesMode": {
+      "type": "boolean",
+      "initial": true
+    },
+    "historyMode": {
+      "type": "boolean",
+      "initial": false
+    },
+    "panelVisible": {
+      "type": "boolean",
+      "initial": false
+    },
+    "panelSecond": {
+      "type": "boolean",
+      "initial": false
+    },
+    "branchPanel": {
+      "type": "boolean",
+      "initial": false
+    },
+    "repoName": {
+      "type": "string",
+      "initial": "Seu próximo commit começa aqui"
+    },
+    "repoPath": {
+      "type": "string",
+      "initial": "Abra um repositório para começar"
+    },
+    "branch": {
+      "type": "string",
+      "initial": "—"
+    },
+    "remote": {
+      "type": "string",
+      "initial": "Git local · sem WebView"
+    },
+    "repoItems": {
+      "type": "string",
+      "initial": "[]"
+    },
+    "fileItems": {
+      "type": "string",
+      "initial": "[]"
+    },
+    "commitItems": {
+      "type": "string",
+      "initial": "[]"
+    },
+    "branchItems": {
+      "type": "string",
+      "initial": "[]"
+    },
+    "selectedRepo": {
+      "type": "integer",
+      "initial": -1
+    },
+    "selectedFile": {
+      "type": "integer",
+      "initial": -1
+    },
+    "selectedCommit": {
+      "type": "integer",
+      "initial": -1
+    },
+    "selectedBranch": {
+      "type": "integer",
+      "initial": -1
+    },
+    "diff": {
+      "type": "string",
+      "initial": "Abra um repositório local para explorar arquivos, alterações e histórico."
+    },
+    "diffTitle": {
+      "type": "string",
+      "initial": "Bem-vindo ao Megalodonte Git"
+    },
+    "mensagem": {
+      "type": "string",
+      "initial": "Pronto"
+    },
+    "summary": {
+      "type": "string",
+      "initial": ""
+    },
+    "description": {
+      "type": "string",
+      "initial": ""
+    },
+    "changesTitle": {
+      "type": "string",
+      "initial": "Alterações (0)"
+    },
+    "commitLabel": {
+      "type": "string",
+      "initial": "Commit · 0 arquivo(s)"
+    },
+    "panelTitle": {
+      "type": "string",
+      "initial": ""
+    },
+    "panelHint": {
+      "type": "string",
+      "initial": ""
+    },
+    "panelValue": {
+      "type": "string",
+      "initial": ""
+    },
+    "panelExtra": {
+      "type": "string",
+      "initial": ""
+    }
+  },
+  "view": {
+    "type": "Column",
+    "props": {
+      "spacing": 10,
+      "fillWidth": true,
+      "fillHeight": true,
+      "bgColor": "#d0d7de"
+    },
+    "children": [
+      {
+        "type": "Row",
+        "props": {
+          "spacing": 8,
+          "padding": 16,
+          "fillWidth": true,
+          "bgColor": "#f6f8fa"
+        },
+        "children": [
+          {
+            "type": "Column",
+            "props": {
+              "spacing": 10,
+              "width": 190
+            },
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "text": "MEGALODONTE"
+                },
+                "style": {
+                  "fontSize": 11,
+                  "bold": true,
+                  "textColor": "#57606a"
+                }
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "text": "Git"
+                },
+                "style": {
+                  "fontSize": 25,
+                  "bold": true,
+                  "textColor": "#24292f"
+                }
+              }
+            ]
+          },
+          {
+            "type": "Column",
+            "props": {
+              "spacing": 10,
+              "fillWidth": true
+            },
+            "children": [
+              {
+                "type": "Text",
+                "props": {},
+                "style": {
+                  "fontSize": 21,
+                  "bold": true,
+                  "textColor": "#24292f"
+                },
+                "bind": {
+                  "text": "repoName"
+                }
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "wrapWidth": 420
+                },
+                "style": {
+                  "fontSize": 11,
+                  "bold": false,
+                  "textColor": "#57606a"
+                },
+                "bind": {
+                  "text": "repoPath"
+                }
+              }
+            ]
+          },
+          {
+            "type": "Button",
+            "props": {
+              "text": "↻  Atualizar",
+              "height": 34
+            },
+            "style": {
+              "fontSize": 12
+            },
+            "events": {
+              "onClick": "refresh"
+            },
+            "bind": {
+              "disabled": "busy"
+            }
+          },
+          {
+            "type": "Button",
+            "props": {
+              "text": "Fetch",
+              "height": 34
+            },
+            "style": {
+              "fontSize": 12
+            },
+            "events": {
+              "onClick": "fetch"
+            },
+            "bind": {
+              "disabled": "busy"
+            }
+          },
+          {
+            "type": "Button",
+            "props": {
+              "text": "↓  Pull",
+              "height": 34
+            },
+            "style": {
+              "fontSize": 12
+            },
+            "events": {
+              "onClick": "pull"
+            },
+            "bind": {
+              "disabled": "busy"
+            }
+          },
+          {
+            "type": "Button",
+            "props": {
+              "text": "↑  Push",
+              "height": 34
+            },
+            "style": {
+              "fontSize": 12
+            },
+            "events": {
+              "onClick": "push"
+            },
+            "bind": {
+              "disabled": "busy"
+            }
+          }
+        ]
+      },
+      {
+        "type": "Column",
+        "props": {
+          "spacing": 10,
+          "padding": 16,
+          "fillWidth": true,
+          "bgColor": "#ddf4ff"
+        },
+        "children": [
+          {
+            "type": "Text",
+            "props": {},
+            "style": {
+              "fontSize": 18,
+              "bold": true,
+              "textColor": "#24292f"
+            },
+            "bind": {
+              "text": "panelTitle"
+            }
+          },
+          {
+            "type": "Text",
+            "props": {},
+            "style": {
+              "fontSize": 13,
+              "bold": false,
+              "textColor": "#57606a"
+            },
+            "bind": {
+              "text": "panelHint"
+            }
+          },
+          {
+            "type": "Input",
+            "props": {
+              "placeholder": "Valor",
+              "height": 36
+            },
+            "bind": {
+              "value": "panelValue",
+              "disabled": "busy"
+            }
+          },
+          {
+            "type": "Column",
+            "props": {
+              "spacing": 10,
+              "fillWidth": true
+            },
+            "children": [
+              {
+                "type": "Input",
+                "props": {
+                  "placeholder": "/caminho/para/nova-pasta",
+                  "height": 36
+                },
+                "bind": {
+                  "value": "panelExtra",
+                  "disabled": "busy"
+                }
+              }
+            ],
+            "bind": {
+              "visible": "panelSecond"
+            }
+          },
+          {
+            "type": "Row",
+            "props": {
+              "spacing": 8
+            },
+            "children": [
+              {
+                "type": "Button",
+                "props": {
+                  "text": "Continuar",
+                  "height": 34
+                },
+                "style": {
+                  "fontSize": 12
+                },
+                "events": {
+                  "onClick": "submitPanel"
+                },
+                "bind": {
+                  "disabled": "busy"
+                }
+              },
+              {
+                "type": "Button",
+                "props": {
+                  "text": "Cancelar",
+                  "height": 34
+                },
+                "style": {
+                  "fontSize": 12
+                },
+                "events": {
+                  "onClick": "closePanel"
+                },
+                "bind": {
+                  "disabled": "busy"
+                }
+              }
+            ]
+          }
+        ],
+        "bind": {
+          "visible": "panelVisible"
+        }
+      },
+      {
+        "type": "Column",
+        "props": {
+          "spacing": 10,
+          "padding": 12,
+          "fillWidth": true,
+          "bgColor": "#f6f8fa"
+        },
+        "children": [
+          {
+            "type": "Text",
+            "props": {
+              "text": "Selecione a branch e clique em Trocar"
+            },
+            "style": {
+              "fontSize": 13,
+              "bold": true,
+              "textColor": "#24292f"
+            }
+          },
+          {
+            "type": "DataList",
+            "props": {
+              "height": 125,
+              "fillWidth": true
+            },
+            "bind": {
+              "items": "branchItems",
+              "selected": "selectedBranch",
+              "disabled": "busy"
+            },
+            "events": {
+              "onSelect": "branchSelected"
+            }
+          },
+          {
+            "type": "Row",
+            "props": {
+              "spacing": 8
+            },
+            "children": [
+              {
+                "type": "Button",
+                "props": {
+                  "text": "Trocar",
+                  "height": 34
+                },
+                "style": {
+                  "fontSize": 12
+                },
+                "events": {
+                  "onClick": "switchBranch"
+                },
+                "bind": {
+                  "disabled": "busy"
+                }
+              },
+              {
+                "type": "Button",
+                "props": {
+                  "text": "Fechar",
+                  "height": 34
+                },
+                "style": {
+                  "fontSize": 12
+                },
+                "events": {
+                  "onClick": "branches"
+                },
+                "bind": {
+                  "disabled": "busy"
+                }
+              }
+            ]
+          }
+        ],
+        "bind": {
+          "visible": "branchPanel"
+        }
+      },
+      {
+        "type": "Row",
+        "props": {
+          "spacing": 8,
+          "fillWidth": true,
+          "fillHeight": true
+        },
+        "children": [
+          {
+            "type": "Column",
+            "props": {
+              "spacing": 10,
+              "width": 245,
+              "padding": 16,
+              "fillHeight": true,
+              "bgColor": "#f6f8fa"
+            },
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "text": "REPOSITÓRIOS"
+                },
+                "style": {
+                  "fontSize": 11,
+                  "bold": true,
+                  "textColor": "#57606a"
+                }
+              },
+              {
+                "type": "Button",
+                "props": {
+                  "text": "Abrir pasta…",
+                  "height": 34,
+                  "fillWidth": true
+                },
+                "style": {
+                  "fontSize": 12
+                },
+                "events": {
+                  "onClick": "chooseRepo"
+                },
+                "bind": {
+                  "disabled": "busy"
+                }
+              },
+              {
+                "type": "Row",
+                "props": {
+                  "spacing": 8
+                },
+                "children": [
+                  {
+                    "type": "Button",
+                    "props": {
+                      "text": "Clonar",
+                      "height": 34
+                    },
+                    "style": {
+                      "fontSize": 12
+                    },
+                    "events": {
+                      "onClick": "clonePanel"
+                    },
+                    "bind": {
+                      "disabled": "busy"
+                    }
+                  },
+                  {
+                    "type": "Button",
+                    "props": {
+                      "text": "Novo",
+                      "height": 34
+                    },
+                    "style": {
+                      "fontSize": 12
+                    },
+                    "events": {
+                      "onClick": "initPanel"
+                    },
+                    "bind": {
+                      "disabled": "busy"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "DataList",
+                "props": {
+                  "height": 250,
+                  "fillWidth": true,
+                  "fillHeight": true
+                },
+                "bind": {
+                  "items": "repoItems",
+                  "selected": "selectedRepo",
+                  "disabled": "busy"
+                },
+                "events": {
+                  "onSelect": "openRecent"
+                }
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "text": "BRANCH ATUAL"
+                },
+                "style": {
+                  "fontSize": 11,
+                  "bold": true,
+                  "textColor": "#57606a"
+                }
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "wrapWidth": 205
+                },
+                "style": {
+                  "fontSize": 15,
+                  "bold": true,
+                  "textColor": "#24292f"
+                },
+                "bind": {
+                  "text": "branch"
+                }
+              },
+              {
+                "type": "Button",
+                "props": {
+                  "text": "Trocar branch…",
+                  "height": 34,
+                  "fillWidth": true
+                },
+                "style": {
+                  "fontSize": 12
+                },
+                "events": {
+                  "onClick": "branches"
+                },
+                "bind": {
+                  "disabled": "busy"
+                }
+              },
+              {
+                "type": "Button",
+                "props": {
+                  "text": "Nova branch…",
+                  "height": 34,
+                  "fillWidth": true
+                },
+                "style": {
+                  "fontSize": 12
+                },
+                "events": {
+                  "onClick": "newBranchPanel"
+                },
+                "bind": {
+                  "disabled": "busy"
+                }
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "wrapWidth": 205
+                },
+                "style": {
+                  "fontSize": 10,
+                  "bold": false,
+                  "textColor": "#57606a"
+                },
+                "bind": {
+                  "text": "remote"
+                }
+              },
+              {
+                "type": "Button",
+                "props": {
+                  "text": "Guardar no stash…",
+                  "height": 34,
+                  "fillWidth": true
+                },
+                "style": {
+                  "fontSize": 12
+                },
+                "events": {
+                  "onClick": "stashPanel"
+                },
+                "bind": {
+                  "disabled": "busy"
+                }
+              },
+              {
+                "type": "Button",
+                "props": {
+                  "text": "Restaurar stash…",
+                  "height": 34,
+                  "fillWidth": true
+                },
+                "style": {
+                  "fontSize": 12
+                },
+                "events": {
+                  "onClick": "restoreStashPanel"
+                },
+                "bind": {
+                  "disabled": "busy"
+                }
+              }
+            ]
+          },
+          {
+            "type": "Column",
+            "props": {
+              "spacing": 10,
+              "width": 330,
+              "padding": 12,
+              "fillHeight": true,
+              "bgColor": "#ffffff"
+            },
+            "children": [
+              {
+                "type": "Row",
+                "props": {
+                  "spacing": 8
+                },
+                "children": [
+                  {
+                    "type": "Button",
+                    "props": {
+                      "text": "Alterações",
+                      "height": 34
+                    },
+                    "style": {
+                      "fontSize": 12
+                    },
+                    "events": {
+                      "onClick": "changes"
+                    },
+                    "bind": {
+                      "disabled": "busy"
+                    }
+                  },
+                  {
+                    "type": "Button",
+                    "props": {
+                      "text": "Histórico",
+                      "height": 34
+                    },
+                    "style": {
+                      "fontSize": 12
+                    },
+                    "events": {
+                      "onClick": "history"
+                    },
+                    "bind": {
+                      "disabled": "busy"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Column",
+                "props": {
+                  "spacing": 10,
+                  "fillHeight": true,
+                  "fillWidth": true
+                },
+                "children": [
+                  {
+                    "type": "Text",
+                    "props": {},
+                    "style": {
+                      "fontSize": 13,
+                      "bold": true,
+                      "textColor": "#24292f"
+                    },
+                    "bind": {
+                      "text": "changesTitle"
+                    }
+                  },
+                  {
+                    "type": "Row",
+                    "props": {
+                      "spacing": 8
+                    },
+                    "children": [
+                      {
+                        "type": "Button",
+                        "props": {
+                          "text": "Todos",
+                          "height": 34
+                        },
+                        "style": {
+                          "fontSize": 12
+                        },
+                        "events": {
+                          "onClick": "selectAll"
+                        },
+                        "bind": {
+                          "disabled": "busy"
+                        }
+                      },
+                      {
+                        "type": "Button",
+                        "props": {
+                          "text": "Nenhum",
+                          "height": 34
+                        },
+                        "style": {
+                          "fontSize": 12
+                        },
+                        "events": {
+                          "onClick": "selectNone"
+                        },
+                        "bind": {
+                          "disabled": "busy"
+                        }
+                      },
+                      {
+                        "type": "Button",
+                        "props": {
+                          "text": "☑ Alternar",
+                          "height": 34
+                        },
+                        "style": {
+                          "fontSize": 12
+                        },
+                        "events": {
+                          "onClick": "toggleFile"
+                        },
+                        "bind": {
+                          "disabled": "busy"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "DataList",
+                    "props": {
+                      "height": 200,
+                      "fillWidth": true,
+                      "fillHeight": true
+                    },
+                    "bind": {
+                      "items": "fileItems",
+                      "selected": "selectedFile",
+                      "disabled": "busy"
+                    },
+                    "events": {
+                      "onSelect": "selectFile"
+                    }
+                  },
+                  {
+                    "type": "Row",
+                    "props": {
+                      "spacing": 8
+                    },
+                    "children": [
+                      {
+                        "type": "Button",
+                        "props": {
+                          "text": "+ Índice",
+                          "height": 34
+                        },
+                        "style": {
+                          "fontSize": 12
+                        },
+                        "events": {
+                          "onClick": "stage"
+                        },
+                        "bind": {
+                          "disabled": "busy"
+                        }
+                      },
+                      {
+                        "type": "Button",
+                        "props": {
+                          "text": "− Índice",
+                          "height": 34
+                        },
+                        "style": {
+                          "fontSize": 12
+                        },
+                        "events": {
+                          "onClick": "unstage"
+                        },
+                        "bind": {
+                          "disabled": "busy"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Text",
+                    "props": {
+                      "text": "CRIAR COMMIT"
+                    },
+                    "style": {
+                      "fontSize": 11,
+                      "bold": true,
+                      "textColor": "#57606a"
+                    }
+                  },
+                  {
+                    "type": "Input",
+                    "props": {
+                      "placeholder": "Resumo do commit (obrigatório)",
+                      "height": 36
+                    },
+                    "bind": {
+                      "value": "summary",
+                      "disabled": "busy"
+                    }
+                  },
+                  {
+                    "type": "TextArea",
+                    "props": {
+                      "placeholder": "Descrição opcional",
+                      "height": 68
+                    },
+                    "bind": {
+                      "value": "description",
+                      "disabled": "busy"
+                    }
+                  },
+                  {
+                    "type": "Button",
+                    "props": {
+                      "height": 34,
+                      "fillWidth": true
+                    },
+                    "style": {
+                      "fontSize": 12
+                    },
+                    "events": {
+                      "onClick": "onSubmit"
+                    },
+                    "bind": {
+                      "disabled": "busy",
+                      "text": "commitLabel"
+                    }
+                  }
+                ],
+                "bind": {
+                  "visible": "changesMode"
+                }
+              },
+              {
+                "type": "Column",
+                "props": {
+                  "spacing": 10,
+                  "fillHeight": true,
+                  "fillWidth": true
+                },
+                "children": [
+                  {
+                    "type": "Text",
+                    "props": {
+                      "text": "Histórico de commits"
+                    },
+                    "style": {
+                      "fontSize": 13,
+                      "bold": true,
+                      "textColor": "#24292f"
+                    }
+                  },
+                  {
+                    "type": "DataList",
+                    "props": {
+                      "height": 400,
+                      "fillWidth": true,
+                      "fillHeight": true
+                    },
+                    "bind": {
+                      "items": "commitItems",
+                      "selected": "selectedCommit",
+                      "disabled": "busy"
+                    },
+                    "events": {
+                      "onSelect": "selectCommit"
+                    }
+                  },
+                  {
+                    "type": "Button",
+                    "props": {
+                      "text": "Carregar mais 100",
+                      "height": 34,
+                      "fillWidth": true
+                    },
+                    "style": {
+                      "fontSize": 12
+                    },
+                    "events": {
+                      "onClick": "moreHistory"
+                    },
+                    "bind": {
+                      "disabled": "busy"
+                    }
+                  }
+                ],
+                "bind": {
+                  "visible": "historyMode"
+                }
+              }
+            ]
+          },
+          {
+            "type": "Column",
+            "props": {
+              "spacing": 10,
+              "padding": 12,
+              "fillWidth": true,
+              "fillHeight": true,
+              "bgColor": "#ffffff"
+            },
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "wrapWidth": 560
+                },
+                "style": {
+                  "fontSize": 14,
+                  "bold": true,
+                  "textColor": "#24292f"
+                },
+                "bind": {
+                  "text": "diffTitle"
+                }
+              },
+              {
+                "type": "Row",
+                "props": {
+                  "spacing": 8
+                },
+                "children": [
+                  {
+                    "type": "Button",
+                    "props": {
+                      "text": "Working tree",
+                      "height": 34
+                    },
+                    "style": {
+                      "fontSize": 12
+                    },
+                    "events": {
+                      "onClick": "workingDiff"
+                    },
+                    "bind": {
+                      "disabled": "busy"
+                    }
+                  },
+                  {
+                    "type": "Button",
+                    "props": {
+                      "text": "Índice",
+                      "height": 34
+                    },
+                    "style": {
+                      "fontSize": 12
+                    },
+                    "events": {
+                      "onClick": "indexDiff"
+                    },
+                    "bind": {
+                      "disabled": "busy"
+                    }
+                  }
+                ],
+                "bind": {
+                  "visible": "changesMode"
+                }
+              },
+              {
+                "type": "DiffView",
+                "props": {
+                  "fillWidth": true,
+                  "fillHeight": true,
+                  "height": 360
+                },
+                "bind": {
+                  "text": "diff"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Row",
+        "props": {
+          "spacing": 8,
+          "padding": 10,
+          "fillWidth": true,
+          "bgColor": "#f6f8fa"
+        },
+        "children": [
+          {
+            "type": "Text",
+            "props": {
+              "wrapWidth": 1180
+            },
+            "style": {
+              "fontSize": 12,
+              "bold": false,
+              "textColor": "#57606a"
+            },
+            "bind": {
+              "text": "mensagem"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

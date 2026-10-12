@@ -1,0 +1,34 @@
+{
+  // Perfil de referência: copiar e ajustar para cada alvo.
+  "schemaVersion": 1,
+  "target": {
+    "installedArtifact": "<caminho real do pacote ou executável>",
+    "version": "<versão verificada>",
+    "evidenceDirectory": "analysis/",
+    "runtimeObservation": "quando necessária e disponível"
+  },
+  "application": {
+    "sourceTemplate": "../megalodonte-cliente",
+    "launcher": "megalodonte.script.ScriptLauncher",
+    "uiContract": "views/*.view.jsonc",
+    "logicContract": "ViewScript por view",
+    "toolkitControlsInConsumer": false,
+    "webView": false,
+    "blockingWork": "ViewScript.background",
+    "stateLifetime": "por sessão de view"
+  },
+  "extensions": {
+    "firstChoice": "componente existente megalodonte-jsonc-ui",
+    "ifMissing": "implementar, testar, publicar e consumir no framework",
+    "dynamicLists": "virtualizar e limitar carregamento"
+  },
+  "delivery": {
+    "java": 25,
+    "gradle": "composite builds locais",
+    "linux": "AppImage + jlink runtime reduzido",
+    "verification": ["testes de domínio", "validar view", "executar AppImage"],
+    "commit": true,
+    "remotePublication": "somente destino remoto configurado e autorizado",
+    "externalNotification": "somente se autorizada"
+  }
+}

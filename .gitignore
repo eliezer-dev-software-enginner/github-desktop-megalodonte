@@ -1,0 +1,5 @@
+.gradle/
+build/
+analysis/*evidence.json
+analysis/*view.json
+*.log

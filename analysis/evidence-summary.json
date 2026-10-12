@@ -1,0 +1,41 @@
+{
+  "evidenceId": "ev_2fdf8c687406481045cd8dc8b57a6a0c26453e6d77d9b8429c29c2b356c27412",
+  "artifactSha256": "605cf675a99aa557672e299e96c151d46a630c5c4d613d2df29db5fb4ca5517b",
+  "inputPath": "/var/lib/flatpak/app/io.github.shiftey.Desktop/x86_64/stable/d0d245eaec5260f69ef7a8a7c08bf7b497175a784224d4919e644e7182e8785b/files/github-desktop/resources/app",
+  "statistics": {
+    "relevant_files": 180,
+    "nested_asar_containers": 0,
+    "text_bytes_read": 17478422,
+    "invalid_utf8_files": 0,
+    "parsed_javascript_files": 67,
+    "visited_ast_nodes": 746620,
+    "findings": 616,
+    "modules": 64,
+    "parse_failures": 0
+  },
+  "summary": {
+    "browser_windows": 0,
+    "explicit_web_preferences": 0,
+    "preload_entrypoints": 0,
+    "context_bridge_apis": 0,
+    "exposed_api_members": 0,
+    "ipc": {
+      "operations": 7,
+      "literal_channels": 0,
+      "dynamic_channel_operations": 7,
+      "renderer_transmissions": 5,
+      "renderer_listeners": 2,
+      "main_handlers": 0,
+      "paired_renderer_transmissions": 0,
+      "ambiguous_renderer_transmissions": 0,
+      "unpaired_literal_renderer_transmissions": 0
+    },
+    "sender_validation_observations": 0,
+    "utility_processes": 0,
+    "resolved_utility_entrypoints": 0,
+    "native_addon_bindings": 0,
+    "resolved_native_addon_bindings": 0
+  },
+  "limitationCount": 88,
+  "evidenceKind": "static JavaScript application analysis"
+}
