@@ -122,6 +122,22 @@
     "panelExtra": {
       "type": "string",
       "initial": ""
+    },
+    "pendingPush": {
+      "type": "boolean",
+      "initial": false
+    },
+    "pushTitle": {
+      "type": "string",
+      "initial": ""
+    },
+    "pushHint": {
+      "type": "string",
+      "initial": ""
+    },
+    "pushLabel": {
+      "type": "string",
+      "initial": "↑  Push"
     }
   },
   "view": {
@@ -245,7 +261,6 @@
           {
             "type": "Button",
             "props": {
-              "text": "↑  Push",
               "height": 34
             },
             "style": {
@@ -257,7 +272,8 @@
               "onClick": "push"
             },
             "bind": {
-              "disabled": "busy"
+              "disabled": "busy",
+              "text": "pushLabel"
             }
           }
         ]
@@ -1040,6 +1056,62 @@
                 "bind": {
                   "text": "diffTitle"
                 }
+              },
+              {
+                "type": "Column",
+                "props": {
+                  "spacing": 6,
+                  "padding": 16,
+                  "fillWidth": true,
+                  "bgColor": "#05264c"
+                },
+                "children": [
+                  {
+                    "type": "Text",
+                    "props": {},
+                    "style": {
+                      "fontSize": 14,
+                      "bold": true,
+                      "textColor": "#ffffff"
+                    },
+                    "bind": {
+                      "text": "pushTitle"
+                    }
+                  },
+                  {
+                    "type": "Text",
+                    "props": {},
+                    "style": {
+                      "fontSize": 11,
+                      "textColor": "#c8d9ed"
+                    },
+                    "bind": {
+                      "text": "pushHint"
+                    }
+                  },
+                  {
+                    "type": "Button",
+                    "props": {
+                      "text": "↑  Push origin",
+                      "height": 34
+                    },
+                    "style": {
+                      "fontSize": 12,
+                      "bgColor": "#0366d6",
+                      "textColor": "#ffffff"
+                    },
+                    "events": {
+                      "onClick": "push"
+                    },
+                    "bind": {
+                      "disabled": "busy"
+                    }
+                  }
+                ],
+                "bind": {
+                  "visible": "pendingPush"
+                },
+                "id": "pushNotice"
               },
               {
                 "type": "Row",

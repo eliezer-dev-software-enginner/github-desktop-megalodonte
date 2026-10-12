@@ -27,6 +27,7 @@ class GitServiceTest {
         write(repo, "Olá espaço [x].txt", "hello\n");
         var snapshot = git.snapshot(repo);
         assertTrue(snapshot.commits().isEmpty());
+        assertFalse(snapshot.sync().tracked());
         assertEquals("Olá espaço [x].txt", snapshot.changes().getFirst().path());
         assertTrue(snapshot.changes().getFirst().untracked());
         assertTrue(git.diff(repo, snapshot.changes().getFirst(), false).contains("hello"));
@@ -70,6 +71,14 @@ class GitServiceTest {
         write(source, "two", "two\n"); git.commit(source, List.of("two"), "Second"); git.push(source); git.fetch(clone); git.pull(clone);
         assertEquals(2, git.log(clone, 0, 100).size()); assertEquals("two\n", Files.readString(clone.root().resolve("two")));
         assertFalse(git.snapshot(clone).remoteUrl().isBlank());
+        assertEquals(0, git.snapshot(clone).sync().ahead());
+        write(clone, "local", "local\n"); git.commit(clone, List.of("local"), "Local only");
+        var pending = git.snapshot(clone).sync();
+        assertEquals(1, pending.ahead()); assertEquals(0, pending.behind());
+        assertFalse(pending.upstream().isBlank());
+        write(source, "remote", "remote\n"); git.commit(source, List.of("remote"), "Remote only"); git.push(source); git.fetch(clone);
+        var diverged = git.snapshot(clone).sync();
+        assertEquals(1, diverged.ahead()); assertEquals(1, diverged.behind());
     }
     @Test void stagedAndWorkingDiffAndConflict() throws Exception {
         var repo = repository("conflict"); write(repo, "same.txt", "base\n"); git.commit(repo, List.of("same.txt"), "Base");

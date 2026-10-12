@@ -57,11 +57,17 @@ public final class Desktop extends ViewScript {
         set("hasRepo", true); set("repoName", value.repository().root().getFileName().toString());
         set("repoPath", value.repository().root().toString()); set("branch", value.branch());
         set("remote", value.remoteUrl().isBlank() ? "Sem remoto configurado" : value.remoteUrl());
+        var sync = value.sync();
+        set("pendingPush", sync.ahead() > 0);
+        set("pushTitle", sync.ahead() == 1 ? "1 commit aguardando push" : sync.ahead() + " commits aguardando push");
+        set("pushHint", "Para " + sync.upstream() + " · comparado ao último fetch");
+        set("pushLabel", sync.ahead() > 0 ? "↑  Push (" + sync.ahead() + ")" : "↑  Push");
         set("selectedFile", -1); set("selectedCommit", -1); set("selectedBranch", -1);
         set("diff", ""); set("diffTitle", "Selecione um arquivo para ver as alterações");
         set("branchItems", json.toJson(value.branches().stream().map(b -> Map.of("label", b, "badge", b.equals(value.branch()) ? "ATUAL" : "")).toList()));
         renderFiles(); renderHistory();
-        message(files.isEmpty() ? "Tudo em dia · nenhuma alteração local" : files.size() + " arquivo(s) alterado(s) · escolha o que incluir no commit");
+        String localStatus = files.isEmpty() ? "Nenhuma alteração local" : files.size() + " arquivo(s) alterado(s) · escolha o que incluir no commit";
+        message(localStatus + (sync.ahead() > 0 ? " · " + sync.ahead() + " commit(s) aguardando push" : ""));
         String path = value.repository().root().toString();
         recent.remove(path); recent.addFirst(path); if (recent.size() > 12) recent.removeLast(); renderRecent();
         List<String> saved = List.copyOf(recent);

@@ -31,6 +31,11 @@ class DesktopLayoutTest {
                 var diff = (javafx.scene.control.ListView<?>) root.lookup(".megalodonte-diff-view");
                 assertNotNull(diff);
                 assertTrue(diff.getStyle().contains("-fx-focus-color: transparent"), "Diff focus must not use Modena blue");
+                app.current().states().set("pushTitle", "7 commits aguardando push");
+                app.current().states().set("pushHint", "Para origin/main · comparado ao último fetch");
+                app.current().states().set("pendingPush", true);
+                var notice = app.current().component("pushNotice").getJavaFxNode();
+                assertTrue(notice.isVisible(), "pending commits must reveal the push notice");
                 for (int[] size : new int[][]{{1366, 684}, {1050, 560}}) {
                     host.resize(size[0], size[1]); host.applyCss(); host.layout();
                     var header = root.getChildren().getFirst();
@@ -40,6 +45,7 @@ class DesktopLayoutTest {
                     assertTrue(footer.getBoundsInParent().getMaxY() <= size[1] + 1, "footer below window");
                     assertTrue(workspace.getBoundsInParent().getMaxY() <= size[1] + 1, "workspace below window");
                     assertTrue(((Region) workspace).getHeight() > 200, "workspace collapsed");
+                    assertTrue(notice.getBoundsInParent().getMaxY() <= size[1], "push notice below window");
                     if (size[0] == 1366) {
                         var snapshot = host.snapshot(null, null);
                         var png = new java.awt.image.BufferedImage((int) snapshot.getWidth(), (int) snapshot.getHeight(), java.awt.image.BufferedImage.TYPE_INT_ARGB);

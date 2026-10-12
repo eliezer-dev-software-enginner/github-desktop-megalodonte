@@ -22,7 +22,10 @@ public final class GitService {
         public boolean conflicted() { return indexStatus == 'U' || workTreeStatus == 'U' || (indexStatus == 'A' && workTreeStatus == 'A') || (indexStatus == 'D' && workTreeStatus == 'D'); }
     }
     public record Commit(String hash, String shortHash, String author, String date, String subject) {}
-    public record Snapshot(Repository repository, String branch, List<String> branches, List<ChangedFile> changes, List<Commit> commits, String remoteUrl) {}
+    public record SyncStatus(String upstream, int ahead, int behind) {
+        public boolean tracked() { return !upstream.isBlank(); }
+    }
+    public record Snapshot(Repository repository, String branch, List<String> branches, List<ChangedFile> changes, List<Commit> commits, String remoteUrl, SyncStatus sync) {}
     public Repository open(Path path) throws IOException {
         Path directory = path.toRealPath();
         String root = run(directory, Map.of(), "rev-parse", "--show-toplevel").strip();
@@ -43,7 +46,15 @@ public final class GitService {
         if (branch.isBlank()) branch = "HEAD destacado " + optional(repo, "rev-parse", "--short", "HEAD");
         String refs = git(repo, "for-each-ref", "--format=%(refname:short)", "refs/heads/");
         List<String> branches = refs.lines().filter(s -> !s.isBlank()).toList();
-        return new Snapshot(repo, branch.strip(), branches, status(repo), log(repo, 0, 100), redact(optional(repo, "remote", "get-url", "origin").strip()));
+        String upstream = optional(repo, "rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}").strip();
+        SyncStatus sync = new SyncStatus("", 0, 0);
+        if (!upstream.isBlank()) {
+            String[] counts = git(repo, "rev-list", "--left-right", "--count", "HEAD...@{upstream}").strip().split("\\s+");
+            if (counts.length != 2) throw new IOException("Contagem de commits do upstream inválida.");
+            try { sync = new SyncStatus(upstream, Integer.parseInt(counts[0]), Integer.parseInt(counts[1])); }
+            catch (NumberFormatException error) { throw new IOException("Contagem de commits do upstream inválida.", error); }
+        }
+        return new Snapshot(repo, branch.strip(), branches, status(repo), log(repo, 0, 100), redact(optional(repo, "remote", "get-url", "origin").strip()), sync);
     }
     public List<ChangedFile> status(Repository repo) throws IOException {
         String raw = git(repo, "status", "--porcelain=v1", "-z", "--untracked-files=all");
