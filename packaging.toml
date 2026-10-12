@@ -1,0 +1,25 @@
+schema_version = 1
+
+[app]
+name = "Megalodonte Git"
+version = "0.1.0"
+main_class = "megalodonte.script.ScriptLauncher"
+icon_linux = "src/main/resources/megalodonte-git.png"
+description = "Cliente Git nativo com interface Megalodonte"
+
+[build]
+mode = "distribution"
+tasks = ["installDist"]
+jar = "build/install/megalodonte-git/lib/megalodonte-git-{version}.jar"
+
+[javafx]
+version = "25.0.1"
+
+[runtime]
+modules = ["javafx.controls", "java.logging", "java.management", "java.naming", "java.net.http", "java.security.jgss", "java.sql", "java.xml", "jdk.charsets", "jdk.crypto.ec", "jdk.unsupported"]
+java_options = ["-Xms32m", "-Xmx256m", "-XX:+UseSerialGC"]
+exclude_natives = ["libjfxwebkit.so", "libjfxmedia.so", "libgstreamer-lite.so", "jfxwebkit.dll"]
+
+[linux]
+package_name = "megalodonte-git"
+menu_group = "Development"

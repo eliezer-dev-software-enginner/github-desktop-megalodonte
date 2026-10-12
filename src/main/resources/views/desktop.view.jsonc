@@ -127,57 +127,37 @@
   "view": {
     "type": "Column",
     "props": {
-      "spacing": 10,
+      "spacing": 1,
       "fillWidth": true,
       "fillHeight": true,
-      "bgColor": "#d0d7de"
+      "bgColor": "#141414"
     },
     "children": [
       {
         "type": "Row",
         "props": {
-          "spacing": 8,
-          "padding": 16,
+          "spacing": 18,
+          "padding": 12,
           "fillWidth": true,
-          "bgColor": "#f6f8fa"
+          "bgColor": "#24292e"
         },
         "children": [
           {
-            "type": "Column",
+            "type": "Text",
             "props": {
-              "spacing": 10,
-              "width": 190
+              "text": "Megalodonte Git"
             },
-            "children": [
-              {
-                "type": "Text",
-                "props": {
-                  "text": "MEGALODONTE"
-                },
-                "style": {
-                  "fontSize": 11,
-                  "bold": true,
-                  "textColor": "#57606a"
-                }
-              },
-              {
-                "type": "Text",
-                "props": {
-                  "text": "Git"
-                },
-                "style": {
-                  "fontSize": 25,
-                  "bold": true,
-                  "textColor": "#24292f"
-                }
-              }
-            ]
+            "style": {
+              "fontSize": 23,
+              "bold": true,
+              "textColor": "#ffffff"
+            }
           },
           {
             "type": "Column",
             "props": {
               "spacing": 10,
-              "fillWidth": true
+              "width": 390
             },
             "children": [
               {
@@ -186,7 +166,7 @@
                 "style": {
                   "fontSize": 21,
                   "bold": true,
-                  "textColor": "#24292f"
+                  "textColor": "#24292e"
                 },
                 "bind": {
                   "text": "repoName"
@@ -200,7 +180,7 @@
                 "style": {
                   "fontSize": 11,
                   "bold": false,
-                  "textColor": "#57606a"
+                  "textColor": "#d1d5da"
                 },
                 "bind": {
                   "text": "repoPath"
@@ -215,7 +195,9 @@
               "height": 34
             },
             "style": {
-              "fontSize": 12
+              "fontSize": 12,
+              "bgColor": "transparent",
+              "textColor": "#24292e"
             },
             "events": {
               "onClick": "refresh"
@@ -231,7 +213,9 @@
               "height": 34
             },
             "style": {
-              "fontSize": 12
+              "fontSize": 12,
+              "bgColor": "transparent",
+              "textColor": "#24292e"
             },
             "events": {
               "onClick": "fetch"
@@ -247,7 +231,9 @@
               "height": 34
             },
             "style": {
-              "fontSize": 12
+              "fontSize": 12,
+              "bgColor": "transparent",
+              "textColor": "#24292e"
             },
             "events": {
               "onClick": "pull"
@@ -263,7 +249,9 @@
               "height": 34
             },
             "style": {
-              "fontSize": 12
+              "fontSize": 12,
+              "bgColor": "transparent",
+              "textColor": "#24292e"
             },
             "events": {
               "onClick": "push"
@@ -280,7 +268,7 @@
           "spacing": 10,
           "padding": 16,
           "fillWidth": true,
-          "bgColor": "#ddf4ff"
+          "bgColor": "#2b3137"
         },
         "children": [
           {
@@ -289,7 +277,7 @@
             "style": {
               "fontSize": 18,
               "bold": true,
-              "textColor": "#24292f"
+              "textColor": "#f6f8fa"
             },
             "bind": {
               "text": "panelTitle"
@@ -301,7 +289,7 @@
             "style": {
               "fontSize": 13,
               "bold": false,
-              "textColor": "#57606a"
+              "textColor": "#959da5"
             },
             "bind": {
               "text": "panelHint"
@@ -354,7 +342,9 @@
                   "height": 34
                 },
                 "style": {
-                  "fontSize": 12
+                  "fontSize": 12,
+                  "bgColor": "#2f363d",
+                  "textColor": "#f6f8fa"
                 },
                 "events": {
                   "onClick": "submitPanel"
@@ -370,7 +360,9 @@
                   "height": 34
                 },
                 "style": {
-                  "fontSize": 12
+                  "fontSize": 12,
+                  "bgColor": "#2f363d",
+                  "textColor": "#f6f8fa"
                 },
                 "events": {
                   "onClick": "closePanel"
@@ -392,7 +384,7 @@
           "spacing": 10,
           "padding": 12,
           "fillWidth": true,
-          "bgColor": "#f6f8fa"
+          "bgColor": "#24292e"
         },
         "children": [
           {
@@ -403,7 +395,7 @@
             "style": {
               "fontSize": 13,
               "bold": true,
-              "textColor": "#24292f"
+              "textColor": "#f6f8fa"
             }
           },
           {
@@ -434,7 +426,9 @@
                   "height": 34
                 },
                 "style": {
-                  "fontSize": 12
+                  "fontSize": 12,
+                  "bgColor": "#2f363d",
+                  "textColor": "#f6f8fa"
                 },
                 "events": {
                   "onClick": "switchBranch"
@@ -450,7 +444,9 @@
                   "height": 34
                 },
                 "style": {
-                  "fontSize": 12
+                  "fontSize": 12,
+                  "bgColor": "#2f363d",
+                  "textColor": "#f6f8fa"
                 },
                 "events": {
                   "onClick": "branches"
@@ -469,518 +465,566 @@
       {
         "type": "Row",
         "props": {
-          "spacing": 8,
+          "spacing": 1,
           "fillWidth": true,
           "fillHeight": true
         },
         "children": [
           {
-            "type": "Column",
+            "type": "Scroll",
             "props": {
-              "spacing": 10,
               "width": 245,
-              "padding": 16,
-              "fillHeight": true,
-              "bgColor": "#f6f8fa"
+              "fillHeight": true
             },
             "children": [
-              {
-                "type": "Text",
-                "props": {
-                  "text": "REPOSITÓRIOS"
-                },
-                "style": {
-                  "fontSize": 11,
-                  "bold": true,
-                  "textColor": "#57606a"
-                }
-              },
-              {
-                "type": "Button",
-                "props": {
-                  "text": "Abrir pasta…",
-                  "height": 34,
-                  "fillWidth": true
-                },
-                "style": {
-                  "fontSize": 12
-                },
-                "events": {
-                  "onClick": "chooseRepo"
-                },
-                "bind": {
-                  "disabled": "busy"
-                }
-              },
-              {
-                "type": "Row",
-                "props": {
-                  "spacing": 8
-                },
-                "children": [
-                  {
-                    "type": "Button",
-                    "props": {
-                      "text": "Clonar",
-                      "height": 34
-                    },
-                    "style": {
-                      "fontSize": 12
-                    },
-                    "events": {
-                      "onClick": "clonePanel"
-                    },
-                    "bind": {
-                      "disabled": "busy"
-                    }
-                  },
-                  {
-                    "type": "Button",
-                    "props": {
-                      "text": "Novo",
-                      "height": 34
-                    },
-                    "style": {
-                      "fontSize": 12
-                    },
-                    "events": {
-                      "onClick": "initPanel"
-                    },
-                    "bind": {
-                      "disabled": "busy"
-                    }
-                  }
-                ]
-              },
-              {
-                "type": "DataList",
-                "props": {
-                  "height": 250,
-                  "fillWidth": true,
-                  "fillHeight": true
-                },
-                "bind": {
-                  "items": "repoItems",
-                  "selected": "selectedRepo",
-                  "disabled": "busy"
-                },
-                "events": {
-                  "onSelect": "openRecent"
-                }
-              },
-              {
-                "type": "Text",
-                "props": {
-                  "text": "BRANCH ATUAL"
-                },
-                "style": {
-                  "fontSize": 11,
-                  "bold": true,
-                  "textColor": "#57606a"
-                }
-              },
-              {
-                "type": "Text",
-                "props": {
-                  "wrapWidth": 205
-                },
-                "style": {
-                  "fontSize": 15,
-                  "bold": true,
-                  "textColor": "#24292f"
-                },
-                "bind": {
-                  "text": "branch"
-                }
-              },
-              {
-                "type": "Button",
-                "props": {
-                  "text": "Trocar branch…",
-                  "height": 34,
-                  "fillWidth": true
-                },
-                "style": {
-                  "fontSize": 12
-                },
-                "events": {
-                  "onClick": "branches"
-                },
-                "bind": {
-                  "disabled": "busy"
-                }
-              },
-              {
-                "type": "Button",
-                "props": {
-                  "text": "Nova branch…",
-                  "height": 34,
-                  "fillWidth": true
-                },
-                "style": {
-                  "fontSize": 12
-                },
-                "events": {
-                  "onClick": "newBranchPanel"
-                },
-                "bind": {
-                  "disabled": "busy"
-                }
-              },
-              {
-                "type": "Text",
-                "props": {
-                  "wrapWidth": 205
-                },
-                "style": {
-                  "fontSize": 10,
-                  "bold": false,
-                  "textColor": "#57606a"
-                },
-                "bind": {
-                  "text": "remote"
-                }
-              },
-              {
-                "type": "Button",
-                "props": {
-                  "text": "Guardar no stash…",
-                  "height": 34,
-                  "fillWidth": true
-                },
-                "style": {
-                  "fontSize": 12
-                },
-                "events": {
-                  "onClick": "stashPanel"
-                },
-                "bind": {
-                  "disabled": "busy"
-                }
-              },
-              {
-                "type": "Button",
-                "props": {
-                  "text": "Restaurar stash…",
-                  "height": 34,
-                  "fillWidth": true
-                },
-                "style": {
-                  "fontSize": 12
-                },
-                "events": {
-                  "onClick": "restoreStashPanel"
-                },
-                "bind": {
-                  "disabled": "busy"
-                }
-              }
-            ]
-          },
-          {
-            "type": "Column",
-            "props": {
-              "spacing": 10,
-              "width": 330,
-              "padding": 12,
-              "fillHeight": true,
-              "bgColor": "#ffffff"
-            },
-            "children": [
-              {
-                "type": "Row",
-                "props": {
-                  "spacing": 8
-                },
-                "children": [
-                  {
-                    "type": "Button",
-                    "props": {
-                      "text": "Alterações",
-                      "height": 34
-                    },
-                    "style": {
-                      "fontSize": 12
-                    },
-                    "events": {
-                      "onClick": "changes"
-                    },
-                    "bind": {
-                      "disabled": "busy"
-                    }
-                  },
-                  {
-                    "type": "Button",
-                    "props": {
-                      "text": "Histórico",
-                      "height": 34
-                    },
-                    "style": {
-                      "fontSize": 12
-                    },
-                    "events": {
-                      "onClick": "history"
-                    },
-                    "bind": {
-                      "disabled": "busy"
-                    }
-                  }
-                ]
-              },
               {
                 "type": "Column",
                 "props": {
-                  "spacing": 10,
-                  "fillHeight": true,
-                  "fillWidth": true
+                  "spacing": 8,
+                  "width": 225,
+                  "padding": 16,
+                  "bgColor": "#24292e"
                 },
                 "children": [
                   {
                     "type": "Text",
-                    "props": {},
-                    "style": {
-                      "fontSize": 13,
-                      "bold": true,
-                      "textColor": "#24292f"
-                    },
-                    "bind": {
-                      "text": "changesTitle"
-                    }
-                  },
-                  {
-                    "type": "Row",
                     "props": {
-                      "spacing": 8
-                    },
-                    "children": [
-                      {
-                        "type": "Button",
-                        "props": {
-                          "text": "Todos",
-                          "height": 34
-                        },
-                        "style": {
-                          "fontSize": 12
-                        },
-                        "events": {
-                          "onClick": "selectAll"
-                        },
-                        "bind": {
-                          "disabled": "busy"
-                        }
-                      },
-                      {
-                        "type": "Button",
-                        "props": {
-                          "text": "Nenhum",
-                          "height": 34
-                        },
-                        "style": {
-                          "fontSize": 12
-                        },
-                        "events": {
-                          "onClick": "selectNone"
-                        },
-                        "bind": {
-                          "disabled": "busy"
-                        }
-                      },
-                      {
-                        "type": "Button",
-                        "props": {
-                          "text": "☑ Alternar",
-                          "height": 34
-                        },
-                        "style": {
-                          "fontSize": 12
-                        },
-                        "events": {
-                          "onClick": "toggleFile"
-                        },
-                        "bind": {
-                          "disabled": "busy"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "type": "DataList",
-                    "props": {
-                      "height": 200,
-                      "fillWidth": true,
-                      "fillHeight": true
-                    },
-                    "bind": {
-                      "items": "fileItems",
-                      "selected": "selectedFile",
-                      "disabled": "busy"
-                    },
-                    "events": {
-                      "onSelect": "selectFile"
-                    }
-                  },
-                  {
-                    "type": "Row",
-                    "props": {
-                      "spacing": 8
-                    },
-                    "children": [
-                      {
-                        "type": "Button",
-                        "props": {
-                          "text": "+ Índice",
-                          "height": 34
-                        },
-                        "style": {
-                          "fontSize": 12
-                        },
-                        "events": {
-                          "onClick": "stage"
-                        },
-                        "bind": {
-                          "disabled": "busy"
-                        }
-                      },
-                      {
-                        "type": "Button",
-                        "props": {
-                          "text": "− Índice",
-                          "height": 34
-                        },
-                        "style": {
-                          "fontSize": 12
-                        },
-                        "events": {
-                          "onClick": "unstage"
-                        },
-                        "bind": {
-                          "disabled": "busy"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "type": "Text",
-                    "props": {
-                      "text": "CRIAR COMMIT"
+                      "text": "REPOSITÓRIOS"
                     },
                     "style": {
                       "fontSize": 11,
                       "bold": true,
-                      "textColor": "#57606a"
-                    }
-                  },
-                  {
-                    "type": "Input",
-                    "props": {
-                      "placeholder": "Resumo do commit (obrigatório)",
-                      "height": 36
-                    },
-                    "bind": {
-                      "value": "summary",
-                      "disabled": "busy"
-                    }
-                  },
-                  {
-                    "type": "TextArea",
-                    "props": {
-                      "placeholder": "Descrição opcional",
-                      "height": 68
-                    },
-                    "bind": {
-                      "value": "description",
-                      "disabled": "busy"
+                      "textColor": "#959da5"
                     }
                   },
                   {
                     "type": "Button",
                     "props": {
+                      "text": "Abrir pasta…",
                       "height": 34,
                       "fillWidth": true
                     },
                     "style": {
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "bgColor": "#2f363d",
+                      "textColor": "#f6f8fa"
                     },
                     "events": {
-                      "onClick": "onSubmit"
+                      "onClick": "chooseRepo"
                     },
                     "bind": {
-                      "disabled": "busy",
-                      "text": "commitLabel"
+                      "disabled": "busy"
                     }
-                  }
-                ],
-                "bind": {
-                  "visible": "changesMode"
-                }
-              },
-              {
-                "type": "Column",
-                "props": {
-                  "spacing": 10,
-                  "fillHeight": true,
-                  "fillWidth": true
-                },
-                "children": [
+                  },
                   {
-                    "type": "Text",
+                    "type": "Row",
                     "props": {
-                      "text": "Histórico de commits"
+                      "spacing": 8
                     },
-                    "style": {
-                      "fontSize": 13,
-                      "bold": true,
-                      "textColor": "#24292f"
-                    }
+                    "children": [
+                      {
+                        "type": "Button",
+                        "props": {
+                          "text": "Clonar",
+                          "height": 34
+                        },
+                        "style": {
+                          "fontSize": 12,
+                          "bgColor": "#2f363d",
+                          "textColor": "#f6f8fa"
+                        },
+                        "events": {
+                          "onClick": "clonePanel"
+                        },
+                        "bind": {
+                          "disabled": "busy"
+                        }
+                      },
+                      {
+                        "type": "Button",
+                        "props": {
+                          "text": "Novo",
+                          "height": 34
+                        },
+                        "style": {
+                          "fontSize": 12,
+                          "bgColor": "#2f363d",
+                          "textColor": "#f6f8fa"
+                        },
+                        "events": {
+                          "onClick": "initPanel"
+                        },
+                        "bind": {
+                          "disabled": "busy"
+                        }
+                      }
+                    ]
                   },
                   {
                     "type": "DataList",
                     "props": {
-                      "height": 400,
+                      "height": 250,
                       "fillWidth": true,
                       "fillHeight": true
                     },
                     "bind": {
-                      "items": "commitItems",
-                      "selected": "selectedCommit",
+                      "items": "repoItems",
+                      "selected": "selectedRepo",
                       "disabled": "busy"
                     },
                     "events": {
-                      "onSelect": "selectCommit"
+                      "onSelect": "openRecent"
+                    }
+                  },
+                  {
+                    "type": "Text",
+                    "props": {
+                      "text": "BRANCH ATUAL"
+                    },
+                    "style": {
+                      "fontSize": 11,
+                      "bold": true,
+                      "textColor": "#959da5"
+                    }
+                  },
+                  {
+                    "type": "Text",
+                    "props": {
+                      "wrapWidth": 205
+                    },
+                    "style": {
+                      "fontSize": 15,
+                      "bold": true,
+                      "textColor": "#f6f8fa"
+                    },
+                    "bind": {
+                      "text": "branch"
                     }
                   },
                   {
                     "type": "Button",
                     "props": {
-                      "text": "Carregar mais 100",
+                      "text": "Trocar branch…",
                       "height": 34,
                       "fillWidth": true
                     },
                     "style": {
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "bgColor": "#2f363d",
+                      "textColor": "#f6f8fa"
                     },
                     "events": {
-                      "onClick": "moreHistory"
+                      "onClick": "branches"
+                    },
+                    "bind": {
+                      "disabled": "busy"
+                    }
+                  },
+                  {
+                    "type": "Button",
+                    "props": {
+                      "text": "Nova branch…",
+                      "height": 34,
+                      "fillWidth": true
+                    },
+                    "style": {
+                      "fontSize": 12,
+                      "bgColor": "#2f363d",
+                      "textColor": "#f6f8fa"
+                    },
+                    "events": {
+                      "onClick": "newBranchPanel"
+                    },
+                    "bind": {
+                      "disabled": "busy"
+                    }
+                  },
+                  {
+                    "type": "Text",
+                    "props": {
+                      "wrapWidth": 205
+                    },
+                    "style": {
+                      "fontSize": 10,
+                      "bold": false,
+                      "textColor": "#959da5"
+                    },
+                    "bind": {
+                      "text": "remote"
+                    }
+                  },
+                  {
+                    "type": "Button",
+                    "props": {
+                      "text": "Guardar no stash…",
+                      "height": 34,
+                      "fillWidth": true
+                    },
+                    "style": {
+                      "fontSize": 12,
+                      "bgColor": "#2f363d",
+                      "textColor": "#f6f8fa"
+                    },
+                    "events": {
+                      "onClick": "stashPanel"
+                    },
+                    "bind": {
+                      "disabled": "busy"
+                    }
+                  },
+                  {
+                    "type": "Button",
+                    "props": {
+                      "text": "Restaurar stash…",
+                      "height": 34,
+                      "fillWidth": true
+                    },
+                    "style": {
+                      "fontSize": 12,
+                      "bgColor": "#2f363d",
+                      "textColor": "#f6f8fa"
+                    },
+                    "events": {
+                      "onClick": "restoreStashPanel"
                     },
                     "bind": {
                       "disabled": "busy"
                     }
                   }
-                ],
-                "bind": {
-                  "visible": "historyMode"
-                }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Scroll",
+            "props": {
+              "width": 330,
+              "fillHeight": true
+            },
+            "children": [
+              {
+                "type": "Column",
+                "props": {
+                  "spacing": 8,
+                  "width": 310,
+                  "padding": 12,
+                  "bgColor": "#24292e"
+                },
+                "children": [
+                  {
+                    "type": "Row",
+                    "props": {
+                      "spacing": 8
+                    },
+                    "children": [
+                      {
+                        "type": "Button",
+                        "props": {
+                          "text": "Alterações",
+                          "height": 34
+                        },
+                        "style": {
+                          "fontSize": 12,
+                          "bgColor": "#2f363d",
+                          "textColor": "#f6f8fa"
+                        },
+                        "events": {
+                          "onClick": "changes"
+                        },
+                        "bind": {
+                          "disabled": "busy"
+                        }
+                      },
+                      {
+                        "type": "Button",
+                        "props": {
+                          "text": "Histórico",
+                          "height": 34
+                        },
+                        "style": {
+                          "fontSize": 12,
+                          "bgColor": "#2f363d",
+                          "textColor": "#f6f8fa"
+                        },
+                        "events": {
+                          "onClick": "history"
+                        },
+                        "bind": {
+                          "disabled": "busy"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Column",
+                    "props": {
+                      "spacing": 10,
+                      "fillHeight": true,
+                      "fillWidth": true
+                    },
+                    "children": [
+                      {
+                        "type": "Text",
+                        "props": {},
+                        "style": {
+                          "fontSize": 13,
+                          "bold": true,
+                          "textColor": "#f6f8fa"
+                        },
+                        "bind": {
+                          "text": "changesTitle"
+                        }
+                      },
+                      {
+                        "type": "Row",
+                        "props": {
+                          "spacing": 8
+                        },
+                        "children": [
+                          {
+                            "type": "Button",
+                            "props": {
+                              "text": "Todos",
+                              "height": 34
+                            },
+                            "style": {
+                              "fontSize": 12,
+                              "bgColor": "#2f363d",
+                              "textColor": "#f6f8fa"
+                            },
+                            "events": {
+                              "onClick": "selectAll"
+                            },
+                            "bind": {
+                              "disabled": "busy"
+                            }
+                          },
+                          {
+                            "type": "Button",
+                            "props": {
+                              "text": "Nenhum",
+                              "height": 34
+                            },
+                            "style": {
+                              "fontSize": 12,
+                              "bgColor": "#2f363d",
+                              "textColor": "#f6f8fa"
+                            },
+                            "events": {
+                              "onClick": "selectNone"
+                            },
+                            "bind": {
+                              "disabled": "busy"
+                            }
+                          },
+                          {
+                            "type": "Button",
+                            "props": {
+                              "text": "☑ Alternar",
+                              "height": 34
+                            },
+                            "style": {
+                              "fontSize": 12,
+                              "bgColor": "#2f363d",
+                              "textColor": "#f6f8fa"
+                            },
+                            "events": {
+                              "onClick": "toggleFile"
+                            },
+                            "bind": {
+                              "disabled": "busy"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "DataList",
+                        "props": {
+                          "height": 200,
+                          "fillWidth": true,
+                          "fillHeight": true
+                        },
+                        "bind": {
+                          "items": "fileItems",
+                          "selected": "selectedFile",
+                          "disabled": "busy"
+                        },
+                        "events": {
+                          "onSelect": "selectFile"
+                        }
+                      },
+                      {
+                        "type": "Row",
+                        "props": {
+                          "spacing": 8
+                        },
+                        "children": [
+                          {
+                            "type": "Button",
+                            "props": {
+                              "text": "+ Índice",
+                              "height": 34
+                            },
+                            "style": {
+                              "fontSize": 12,
+                              "bgColor": "#2f363d",
+                              "textColor": "#f6f8fa"
+                            },
+                            "events": {
+                              "onClick": "stage"
+                            },
+                            "bind": {
+                              "disabled": "busy"
+                            }
+                          },
+                          {
+                            "type": "Button",
+                            "props": {
+                              "text": "− Índice",
+                              "height": 34
+                            },
+                            "style": {
+                              "fontSize": 12,
+                              "bgColor": "#2f363d",
+                              "textColor": "#f6f8fa"
+                            },
+                            "events": {
+                              "onClick": "unstage"
+                            },
+                            "bind": {
+                              "disabled": "busy"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "Text",
+                        "props": {
+                          "text": "CRIAR COMMIT"
+                        },
+                        "style": {
+                          "fontSize": 11,
+                          "bold": true,
+                          "textColor": "#959da5"
+                        }
+                      },
+                      {
+                        "type": "Input",
+                        "props": {
+                          "placeholder": "Resumo do commit (obrigatório)",
+                          "height": 36
+                        },
+                        "bind": {
+                          "value": "summary",
+                          "disabled": "busy"
+                        }
+                      },
+                      {
+                        "type": "TextArea",
+                        "props": {
+                          "placeholder": "Descrição opcional",
+                          "height": 68
+                        },
+                        "bind": {
+                          "value": "description",
+                          "disabled": "busy"
+                        }
+                      },
+                      {
+                        "type": "Button",
+                        "props": {
+                          "height": 34,
+                          "fillWidth": true
+                        },
+                        "style": {
+                          "fontSize": 12,
+                          "bgColor": "#0366d6",
+                          "textColor": "#f6f8fa"
+                        },
+                        "events": {
+                          "onClick": "onSubmit"
+                        },
+                        "bind": {
+                          "disabled": "busy",
+                          "text": "commitLabel"
+                        }
+                      }
+                    ],
+                    "bind": {
+                      "visible": "changesMode"
+                    }
+                  },
+                  {
+                    "type": "Column",
+                    "props": {
+                      "spacing": 10,
+                      "fillHeight": true,
+                      "fillWidth": true
+                    },
+                    "children": [
+                      {
+                        "type": "Text",
+                        "props": {
+                          "text": "Histórico de commits"
+                        },
+                        "style": {
+                          "fontSize": 13,
+                          "bold": true,
+                          "textColor": "#f6f8fa"
+                        }
+                      },
+                      {
+                        "type": "DataList",
+                        "props": {
+                          "height": 400,
+                          "fillWidth": true,
+                          "fillHeight": true
+                        },
+                        "bind": {
+                          "items": "commitItems",
+                          "selected": "selectedCommit",
+                          "disabled": "busy"
+                        },
+                        "events": {
+                          "onSelect": "selectCommit"
+                        }
+                      },
+                      {
+                        "type": "Button",
+                        "props": {
+                          "text": "Carregar mais 100",
+                          "height": 34,
+                          "fillWidth": true
+                        },
+                        "style": {
+                          "fontSize": 12,
+                          "bgColor": "#2f363d",
+                          "textColor": "#f6f8fa"
+                        },
+                        "events": {
+                          "onClick": "moreHistory"
+                        },
+                        "bind": {
+                          "disabled": "busy"
+                        }
+                      }
+                    ],
+                    "bind": {
+                      "visible": "historyMode"
+                    }
+                  }
+                ]
               }
             ]
           },
           {
             "type": "Column",
             "props": {
-              "spacing": 10,
+              "spacing": 8,
               "padding": 12,
               "fillWidth": true,
               "fillHeight": true,
-              "bgColor": "#ffffff"
+              "bgColor": "#24292e"
             },
             "children": [
               {
@@ -991,7 +1035,7 @@
                 "style": {
                   "fontSize": 14,
                   "bold": true,
-                  "textColor": "#24292f"
+                  "textColor": "#f6f8fa"
                 },
                 "bind": {
                   "text": "diffTitle"
@@ -1010,7 +1054,9 @@
                       "height": 34
                     },
                     "style": {
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "bgColor": "#2f363d",
+                      "textColor": "#f6f8fa"
                     },
                     "events": {
                       "onClick": "workingDiff"
@@ -1026,7 +1072,9 @@
                       "height": 34
                     },
                     "style": {
-                      "fontSize": 12
+                      "fontSize": 12,
+                      "bgColor": "#2f363d",
+                      "textColor": "#f6f8fa"
                     },
                     "events": {
                       "onClick": "indexDiff"
@@ -1061,7 +1109,7 @@
           "spacing": 8,
           "padding": 10,
           "fillWidth": true,
-          "bgColor": "#f6f8fa"
+          "bgColor": "#24292e"
         },
         "children": [
           {
@@ -1072,7 +1120,7 @@
             "style": {
               "fontSize": 12,
               "bold": false,
-              "textColor": "#57606a"
+              "textColor": "#959da5"
             },
             "bind": {
               "text": "mensagem"

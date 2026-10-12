@@ -9,6 +9,7 @@ java { toolchain { languageVersion.set(JavaLanguageVersion.of(25)) } }
 javafx { version = "25.0.1"; modules("javafx.controls", "javafx.graphics") }
 dependencies {
     implementation("megalodonte:megalodonte-script-app:0.1.0")
+    implementation("megalodonte:megalodonte-theme:1.0.0-beta")
     implementation("com.google.code.gson:gson:2.11.0")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")

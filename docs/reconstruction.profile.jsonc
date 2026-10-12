@@ -15,17 +15,21 @@
     "toolkitControlsInConsumer": false,
     "webView": false,
     "blockingWork": "ViewScript.background",
-    "stateLifetime": "por sessão de view"
+    "stateLifetime": "por sessão de view",
+    "theme": "app.themeClass e tokens extraídos do aplicativo inspecionado",
+    "icon": "app.icon com recurso PNG no classpath"
   },
   "extensions": {
-    "firstChoice": "componente existente megalodonte-jsonc-ui",
+    "firstChoice": "componente existente em megalodonte-components",
+    "jsoncPolicy": "JSONC configura componentes de megalodonte-components; não instancia controles JavaFX",
     "ifMissing": "implementar, testar, publicar e consumir no framework",
     "dynamicLists": "virtualizar e limitar carregamento"
   },
   "delivery": {
     "java": 25,
     "gradle": "composite builds locais",
-    "linux": "AppImage + jlink runtime reduzido",
+    "linux": "python3 scripts/package.py build appimage --run",
+    "packaging": "megalodonte-packaging + packaging.toml",
     "verification": ["testes de domínio", "validar view", "executar AppImage"],
     "commit": true,
     "remotePublication": "somente destino remoto configurado e autorizado",

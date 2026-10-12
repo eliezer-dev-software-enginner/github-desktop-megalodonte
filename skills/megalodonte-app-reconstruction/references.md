@@ -8,4 +8,4 @@ Raiz: `/home/eliezer/Desktop/dev/dev/megalodonte-world`.
 - Tema e componentes: `megalodonte-ecossystem/megalodonte-libs`.
 - Exemplo Git e empacotamento: `megalodonte-declarative/megalodonte-git`.
 
-Usar Java 25 e os Gradle composite builds locais durante desenvolvimento. `JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 bash gradlew test installDist --offline`; para publicar biblioteca local: `bash gradlew publishToMavenLocal`. O empacotamento AppImage no exemplo está em `scripts/package-appimage.sh`; configure `MEGALODONTE_NO_OPEN=1` quando apenas gerar o artefato. Não copie IDs/versionamentos sem verificar o projeto atual.
+Usar Java 25 e os Gradle composite builds locais durante desenvolvimento. `JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 bash gradlew test installDist --offline`; para publicar biblioteca local: `bash gradlew publishToMavenLocal`. O empacotamento AppImage usa `scripts/package.py` e `packaging.toml` do `megalodonte-packaging`: `python3 scripts/package.py build appimage --run`. Omita `--run` quando apenas gerar o artefato. Não copie IDs/versionamentos sem verificar o projeto atual.
