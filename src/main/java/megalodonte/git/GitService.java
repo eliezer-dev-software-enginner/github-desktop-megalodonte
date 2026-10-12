@@ -130,9 +130,29 @@ public final class GitService {
         if (name == null || name.isBlank() || name.startsWith("-")) throw new IOException("Nome de branch inválido.");
         git(repo, "check-ref-format", "--branch", name);
     }
-    public void fetch(Repository repo) throws IOException { git(repo, "fetch", "--all", "--prune"); }
-    public void pull(Repository repo) throws IOException { git(repo, "pull", "--ff-only"); }
-    public void push(Repository repo) throws IOException { git(repo, "push"); }
+    public void fetch(Repository repo) throws IOException { remoteOperation(repo, "fetch", "--all", "--prune"); }
+    public void pull(Repository repo) throws IOException { remoteOperation(repo, "pull", "--ff-only"); }
+    public void push(Repository repo) throws IOException { remoteOperation(repo, "push"); }
+    private void remoteOperation(Repository repo, String... args) throws IOException {
+        try { git(repo, args); }
+        catch (GitException httpsFailure) {
+            if (!needsGithubSshRetry(httpsFailure)) throw httpsFailure;
+            try {
+                List<String> retry = new ArrayList<>(List.of("-c", "url.git@github.com:.insteadOf=https://github.com/"));
+                retry.addAll(List.of(args));
+                run(repo.root(), Map.of("GIT_SSH_COMMAND", "ssh -o BatchMode=yes -o StrictHostKeyChecking=yes"),
+                    retry.toArray(String[]::new));
+            } catch (IOException sshFailure) {
+                sshFailure.addSuppressed(httpsFailure);
+                throw sshFailure;
+            }
+        }
+    }
+    static boolean needsGithubSshRetry(IOException error) {
+        String detail = error.getMessage().toLowerCase(Locale.ROOT);
+        return detail.contains("github.com") && (detail.contains("could not read username")
+                || detail.contains("authentication failed") || detail.contains("terminal prompts disabled"));
+    }
     public void stashSave(Repository repo, String message) throws IOException { git(repo, "stash", "push", "--include-untracked", "-m", message == null ? "Megalodonte Git" : message); }
     public void stashPop(Repository repo) throws IOException { git(repo, "stash", "pop"); }
     private void pathCommand(Repository repo, Map<String,String> env, List<String> prefix, List<String> paths) throws IOException {

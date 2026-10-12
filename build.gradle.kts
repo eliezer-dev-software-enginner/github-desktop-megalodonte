@@ -3,7 +3,7 @@ plugins {
     id("org.openjfx.javafxplugin") version "0.1.0"
 }
 group = "megalodonte"
-version = "0.1.1"
+version = "0.1.2"
 repositories { mavenLocal(); mavenCentral() }
 java { toolchain { languageVersion.set(JavaLanguageVersion.of(25)) } }
 javafx { version = "25.0.1"; modules("javafx.controls", "javafx.graphics") }

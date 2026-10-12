@@ -2,6 +2,7 @@ package megalodonte.git;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import java.io.IOException;
 import java.nio.file.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -97,5 +98,10 @@ class GitServiceTest {
         var repo = repository("invalid");
         assertThrows(java.io.IOException.class, () -> git.stage(repo, List.of("../outside")));
         assertThrows(java.io.IOException.class, () -> git.createBranch(repo, "--bad"));
+    }
+    @Test void sshRetryOnlyForGithubCredentialFailures() {
+        assertTrue(GitService.needsGithubSshRetry(new IOException("fatal: could not read Username for 'https://github.com': terminal prompts disabled")));
+        assertFalse(GitService.needsGithubSshRetry(new IOException("rejected non-fast-forward by github.com")));
+        assertFalse(GitService.needsGithubSshRetry(new IOException("could not read Username for 'https://other.example': terminal prompts disabled")));
     }
 }
