@@ -1,0 +1,117 @@
+name: Package native installers
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            platform: linux
+          - os: windows-2022
+            platform: windows
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    steps:
+      - name: Check out Megalodonte Git
+        uses: actions/checkout@v4
+
+      - name: Check out Megalodonte framework
+        shell: bash
+        run: |
+          set -euo pipefail
+          owner=eliezer-dev-software-enginner
+          for project in megalodonte-script-app megalodonte-jsonc-ui; do
+            git clone --depth 1 "https://github.com/$owner/$project.git" "../$project"
+          done
+          libraries="../../megalodonte-ecossystem/megalodonte-libs"
+          mkdir -p "$libraries"
+          for project in megalodonte-core megalodonte-base megalodonte-components megalodonte-theme; do
+            git clone --depth 1 "https://github.com/$owner/$project.git" "$libraries/$project"
+          done
+          git clone --depth 1 "https://github.com/$owner/megalodonte-packaging.git" ../megalodonte-packaging
+
+      - name: Set up Java 25 with JMODs
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          java-package: jdk+jmods
+          cache: gradle
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Linux packaging tools
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y fakeroot xvfb
+
+      - name: Install WiX Toolset
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: choco install wixtoolset --version=3.14.1 -y
+
+      - name: Install Linux JavaFX SDK and appimagetool
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --output "$RUNNER_TEMP/javafx.zip" \
+            https://download2.gluonhq.com/openjfx/25.0.1/openjfx-25.0.1_linux-x64_bin-sdk.zip
+          unzip -q "$RUNNER_TEMP/javafx.zip" -d "$RUNNER_TEMP"
+          mkdir -p "$RUNNER_TEMP/javafx"
+          mv "$RUNNER_TEMP/javafx-sdk-25.0.1" "$RUNNER_TEMP/javafx/linux-25.0.1"
+          curl --fail --location --retry 3 --output "$RUNNER_TEMP/appimagetool-x86_64.AppImage" \
+            https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x "$RUNNER_TEMP/appimagetool-x86_64.AppImage"
+
+      - name: Install Windows JavaFX SDK
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $zip = Join-Path $env:RUNNER_TEMP 'javafx.zip'
+          Invoke-WebRequest 'https://download2.gluonhq.com/openjfx/25.0.1/openjfx-25.0.1_windows-x64_bin-sdk.zip' -OutFile $zip
+          Expand-Archive $zip -DestinationPath $env:RUNNER_TEMP
+          New-Item -ItemType Directory -Force (Join-Path $env:RUNNER_TEMP 'javafx') | Out-Null
+          Move-Item (Join-Path $env:RUNNER_TEMP 'javafx-sdk-25.0.1') (Join-Path $env:RUNNER_TEMP 'javafx/windows-25.0.1')
+
+      - name: Test on Linux
+        if: runner.os == 'Linux'
+        run: xvfb-run -a bash ./gradlew test --no-daemon
+
+      - name: Build AppImage and DEB with megalodonte-packaging
+        if: runner.os == 'Linux'
+        env:
+          JAVAFX_MODULES_HOME: ${{ runner.temp }}/javafx
+          APPIMAGETOOL: ${{ runner.temp }}/appimagetool-x86_64.AppImage
+          MEGALODONTE_PACKAGING_HOME: ${{ github.workspace }}/../megalodonte-packaging
+        run: |
+          python3 scripts/package.py build appimage
+          python3 scripts/package.py build deb --skip-build
+
+      - name: Build MSI with megalodonte-packaging
+        if: runner.os == 'Windows'
+        env:
+          JAVAFX_MODULES_HOME: ${{ runner.temp }}/javafx
+          MEGALODONTE_PACKAGING_HOME: ${{ github.workspace }}/../megalodonte-packaging
+        run: python scripts/package.py build msi
+
+      - name: Upload native installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: megalodonte-git-${{ matrix.platform }}
+          path: |
+            dist/*.AppImage
+            dist/*.deb
+            dist/*.msi
+          if-no-files-found: error

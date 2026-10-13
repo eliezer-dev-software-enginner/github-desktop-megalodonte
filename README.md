@@ -19,6 +19,6 @@ O layout limita a janela à área visível da tela e deixa os painéis estreitos
 
 ## GitHub Actions
 
-O workflow [Build AppImage](.github/workflows/appimage.yml) executa os testes em uma tela virtual e gera o AppImage com `megalodonte-packaging` a cada push no `main`. Também pode ser iniciado manualmente em **Actions → Build AppImage → Run workflow**. O AppImage fica disponível como artefato `megalodonte-git-linux-x86_64` na execução.
+O workflow [Package native installers](.github/workflows/package.yml) executa os testes em uma tela virtual e gera AppImage e `.deb` no Linux e `.msi` no Windows com `megalodonte-packaging` a cada push no `main`. Também pode ser iniciado manualmente em **Actions → Package native installers → Run workflow**. Os instaladores ficam nos artefatos `megalodonte-git-linux` e `megalodonte-git-windows` da execução.
 
 O workflow baixa `megalodonte-script-app`, `megalodonte-jsonc-ui`, `megalodonte-core`, `megalodonte-base`, `megalodonte-components`, `megalodonte-theme` e `megalodonte-packaging` dos repositórios públicos do projeto para montar o build composto no runner.

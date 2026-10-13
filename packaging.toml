@@ -5,6 +5,7 @@ name = "Megalodonte Git"
 version = "0.1.2"
 main_class = "megalodonte.script.ScriptLauncher"
 icon_linux = "src/main/resources/megalodonte-git.png"
+icon_windows = "src/main/resources/megalodonte-git.ico"
 description = "Cliente Git nativo com interface Megalodonte"
 
 [build]
