@@ -16,3 +16,9 @@ O segundo comando usa `megalodonte-packaging` para criar `dist/Megalodonte Git-0
 [Resultados da inspeção REA](docs/REA_FINDINGS.md) · [Perfil reutilizável](docs/reconstruction.profile.jsonc) · [Skill reutilizável](skills/megalodonte-app-reconstruction/SKILL.md).
 
 O layout limita a janela à área visível da tela e deixa os painéis estreitos com rolagem vertical. O teste `DesktopLayoutTest` verifica a interface em 1366×684 e 1050×560.
+
+## GitHub Actions
+
+O workflow [Build AppImage](.github/workflows/appimage.yml) executa os testes em uma tela virtual e gera o AppImage com `megalodonte-packaging` a cada push no `main`. Também pode ser iniciado manualmente em **Actions → Build AppImage → Run workflow**. O AppImage fica disponível como artefato `megalodonte-git-linux-x86_64` na execução.
+
+O workflow baixa `megalodonte-script-app`, `megalodonte-jsonc-ui`, `megalodonte-core`, `megalodonte-base`, `megalodonte-components`, `megalodonte-theme` e `megalodonte-packaging` dos repositórios públicos do projeto para montar o build composto no runner.
