@@ -68,6 +68,8 @@ class GitServiceTest {
         command(source.root(), "remote", "add", "origin", bare.toString()); command(source.root(), "push", "-u", "origin", original);
         command(bare, "symbolic-ref", "HEAD", "refs/heads/" + original);
         var clone = git.cloneRepository(bare.toString(), temporary.resolve("clone"));
+        command(clone.root(), "config", "user.name", "Test User");
+        command(clone.root(), "config", "user.email", "test@example.invalid");
         assertEquals(1, git.log(clone, 0, 100).size());
         write(source, "two", "two\n"); git.commit(source, List.of("two"), "Second"); git.push(source); git.fetch(clone); git.pull(clone);
         assertEquals(2, git.log(clone, 0, 100).size()); assertEquals("two\n", Files.readString(clone.root().resolve("two")));
