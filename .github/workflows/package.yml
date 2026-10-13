@@ -30,15 +30,17 @@ jobs:
         run: |
           set -euo pipefail
           owner=eliezer-dev-software-enginner
+          declarative=../../framework/megalodonte-declarative
+          libraries=../../framework/libraries
+          packaging=../../framework/megalodonte-packaging
+          mkdir -p "$declarative" "$libraries"
           for project in megalodonte-script-app megalodonte-jsonc-ui; do
-            git clone --depth 1 "https://github.com/$owner/$project.git" "../$project"
+            git clone --depth 1 "https://github.com/$owner/$project.git" "$declarative/$project"
           done
-          libraries="../../libraries"
-          mkdir -p "$libraries"
           for project in megalodonte-core megalodonte-base megalodonte-components megalodonte-theme; do
             git clone --depth 1 "https://github.com/$owner/$project.git" "$libraries/$project"
           done
-          git clone --depth 1 "https://github.com/$owner/megalodonte-packaging.git" ../megalodonte-packaging
+          git clone --depth 1 "https://github.com/$owner/megalodonte-packaging.git" "$packaging"
 
       - name: Set up Java 25 with JMODs
         uses: actions/setup-java@v6
@@ -95,7 +97,7 @@ jobs:
         env:
           JAVAFX_MODULES_HOME: ${{ runner.temp }}/javafx
           APPIMAGETOOL: ${{ runner.temp }}/appimagetool-x86_64.AppImage
-          MEGALODONTE_PACKAGING_HOME: ${{ github.workspace }}/../megalodonte-packaging
+          MEGALODONTE_PACKAGING_HOME: ${{ github.workspace }}/../../framework/megalodonte-packaging
         run: |
           python3 scripts/package.py build appimage
           python3 scripts/package.py build deb --skip-build
@@ -104,7 +106,7 @@ jobs:
         if: runner.os == 'Windows'
         env:
           JAVAFX_MODULES_HOME: ${{ runner.temp }}/javafx
-          MEGALODONTE_PACKAGING_HOME: ${{ github.workspace }}/../megalodonte-packaging
+          MEGALODONTE_PACKAGING_HOME: ${{ github.workspace }}/../../framework/megalodonte-packaging
         run: python scripts/package.py build msi
 
       - name: Upload native installers
