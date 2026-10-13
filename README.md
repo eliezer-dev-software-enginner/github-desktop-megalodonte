@@ -11,7 +11,7 @@ JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 bash gradlew test run
 python3 scripts/package.py build appimage --run
 ```
 
-O segundo comando usa `megalodonte-packaging` para criar `dist/Megalodonte Git-0.1.2-x86_64.AppImage` e executá-lo. Para apenas empacotar, omita `--run`. `APPIMAGETOOL` pode apontar para uma ferramenta alternativa; por padrão, o empacotador procura a ferramenta instalada ou a do workspace. A build usa composite builds das bibliotecas locais.
+O segundo comando usa `megalodonte-packaging` para criar `dist/Megalodonte Git-0.1.3-x86_64.AppImage` e executá-lo. Para apenas empacotar, omita `--run`. `APPIMAGETOOL` pode apontar para uma ferramenta alternativa; por padrão, o empacotador procura a ferramenta instalada ou a do workspace. A build usa composite builds das bibliotecas locais.
 
 [Resultados da inspeção REA](docs/REA_FINDINGS.md) · [Perfil reutilizável](docs/reconstruction.profile.jsonc) · [Skill reutilizável](skills/megalodonte-app-reconstruction/SKILL.md).
 
@@ -23,7 +23,7 @@ O workflow [Package native installers](.github/workflows/package.yml) executa os
 
 O workflow baixa `megalodonte-script-app`, `megalodonte-jsonc-ui`, `megalodonte-core`, `megalodonte-base`, `megalodonte-components`, `megalodonte-theme` e `megalodonte-packaging` dos repositórios públicos do projeto para montar o build composto no runner.
 
-Uma tag `vX.Y.Z` que corresponda à versão de `packaging.toml` executa os dois builds e publica uma GitHub Release com AppImage, `.deb` e `.msi`. Exemplo: `git tag v0.1.2 && git push origin v0.1.2`. A publicação só ocorre após ambos os jobs de empacotamento terminarem com sucesso.
+Uma tag `vX.Y.Z` que corresponda à versão de `packaging.toml` executa os dois builds e publica uma GitHub Release com AppImage, `.deb` e `.msi`. Exemplo: `git tag v0.1.3 && git push origin v0.1.3`. A publicação só ocorre após ambos os jobs de empacotamento terminarem com sucesso.
 
 ## Memória e tamanho no Linux
 

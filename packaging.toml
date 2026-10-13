@@ -2,7 +2,7 @@ schema_version = 1
 
 [app]
 name = "Megalodonte Git"
-version = "0.1.2"
+version = "0.1.3"
 main_class = "megalodonte.script.ScriptLauncher"
 icon_linux = "src/main/resources/megalodonte-git.png"
 icon_windows = "src/main/resources/megalodonte-git.ico"
