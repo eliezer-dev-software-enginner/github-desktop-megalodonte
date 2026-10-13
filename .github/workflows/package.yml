@@ -33,7 +33,7 @@ jobs:
           for project in megalodonte-script-app megalodonte-jsonc-ui; do
             git clone --depth 1 "https://github.com/$owner/$project.git" "../$project"
           done
-          libraries="../../megalodonte-ecossystem/megalodonte-libs"
+          libraries="../../libraries"
           mkdir -p "$libraries"
           for project in megalodonte-core megalodonte-base megalodonte-components megalodonte-theme; do
             git clone --depth 1 "https://github.com/$owner/$project.git" "$libraries/$project"
