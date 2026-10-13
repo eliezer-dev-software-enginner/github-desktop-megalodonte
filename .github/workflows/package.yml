@@ -59,7 +59,7 @@ jobs:
       - name: Install WiX Toolset
         if: runner.os == 'Windows'
         shell: pwsh
-        run: choco install wixtoolset --version=3.14.1 -y
+        run: choco install wixtoolset -y
 
       - name: Install Linux JavaFX SDK and appimagetool
         if: runner.os == 'Linux'
