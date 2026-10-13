@@ -23,6 +23,8 @@ O workflow [Package native installers](.github/workflows/package.yml) executa os
 
 O workflow baixa `megalodonte-script-app`, `megalodonte-jsonc-ui`, `megalodonte-core`, `megalodonte-base`, `megalodonte-components`, `megalodonte-theme` e `megalodonte-packaging` dos repositórios públicos do projeto para montar o build composto no runner.
 
+Uma tag `vX.Y.Z` que corresponda à versão de `packaging.toml` executa os dois builds e publica uma GitHub Release com AppImage, `.deb` e `.msi`. Exemplo: `git tag v0.1.2 && git push origin v0.1.2`. A publicação só ocorre após ambos os jobs de empacotamento terminarem com sucesso.
+
 ## Memória e tamanho no Linux
 
 Medição local em 12/10/2026, Linux x86_64, com o GitHub Desktop **3.4.13-linux1** (Flatpak `io.github.shiftey.Desktop`) e o Megalodonte Git **0.1.2** (AppImage) abertos ao mesmo tempo, em repouso. Para memória, somei a **PSS** de todos os processos de cada aplicativo em `/proc/*/smaps_rollup` e usei a mediana de cinco leituras, espaçadas em cinco segundos. PSS distribui as páginas compartilhadas entre os processos e evita a dupla contagem que ocorre ao somar RSS.
