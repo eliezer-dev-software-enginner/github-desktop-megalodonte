@@ -1,5 +1,7 @@
 # Megalodonte Git
 
+![Identidade visual de Megalodonte Git](src/main/resources/megalodonte-git.png)
+
 Cliente Git desktop nativo, orientado por dados e criado com o framework Megalodonte. A view inteira é JSONC (`src/main/resources/views/desktop.view.jsonc`), com lógica em `Desktop.java`, serviços Git em `GitService.java` e launcher compartilhado `megalodonte.script.ScriptLauncher`. Não usa WebView nem componentes JavaFX no código consumidor.
 
 Abre, cria e clona repositórios; mostra alterações e diff, índice e histórico; faz commits de arquivos selecionados sem capturar alterações alheias já preparadas; cria/troca branch; executa fetch, pull fast-forward, push e stash. Listas, diff e controles de mídia vêm de `megalodonte-components`, configurados e vinculados a dados por `megalodonte-jsonc-ui`. O tema escuro usa os tokens de cor do `renderer.css` do GitHub Desktop instalado; o ícone do app está ligado à janela e ao pacote. A sincronização da branch mostra os commits à frente do upstream e oferece o push mesmo quando não há arquivos alterados; a contagem usa as referências do último fetch. Operações Git rodam fora da thread de UI.
