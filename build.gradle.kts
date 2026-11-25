@@ -8,6 +8,7 @@ repositories { mavenLocal(); mavenCentral() }
 java { toolchain { languageVersion.set(JavaLanguageVersion.of(25)) } }
 javafx { version = "25.0.1"; modules("javafx.controls", "javafx.graphics") }
 dependencies {
+    // DEPRECATED: this launcher pulls in frozen megalodonte-jsonc-ui; migrate to native mode.
     implementation("megalodonte:megalodonte-script-app:0.1.0")
     implementation("megalodonte:megalodonte-theme:1.0.0-beta")
     implementation("com.google.code.gson:gson:2.11.0")

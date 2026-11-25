@@ -1,5 +1,8 @@
 # Megalodonte Git
 
+> [!WARNING]
+> **Depreciação:** este projeto usa `megalodonte-jsonc-ui` via `megalodonte-script-app`; o renderizador está congelado e não recebe correções. Migre para o **modo native** (`megalodonte <app> --mode native`), compondo as telas com componentes Megalodonte em Java.
+
 ![Identidade visual de Megalodonte Git](src/main/resources/megalodonte-git.png)
 
 Cliente Git desktop nativo, orientado por dados e criado com o framework Megalodonte. A view inteira é JSONC (`src/main/resources/views/desktop.view.jsonc`), com lógica em `Desktop.java`, serviços Git em `GitService.java` e launcher compartilhado `megalodonte.script.ScriptLauncher`. Não usa WebView nem componentes JavaFX no código consumidor.
